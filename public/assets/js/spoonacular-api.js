@@ -1,15 +1,5 @@
 const API_KEY = "f00927d28fd14a4fa274e892d9a2af03";
 
-//get recipes by ingredients
-// var ingredients = "apples,+flour,+sugar";
-// var queryUrl =
-//   "https://api.spoonacular.com/recipes/findByIngredients?apiKey=" +
-//   API_KEY +
-//   "?ingredients=" +
-//   ingredients +
-//   "&number=2";
-
-//api.spoonacular.recipes/ID/information?
 function getRecipeIDs(ingredients) {
   var ingredientList = [];
 
