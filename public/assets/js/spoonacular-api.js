@@ -1,18 +1,61 @@
 const API_KEY = "f00927d28fd14a4fa274e892d9a2af03";
 
 var ingredientList = [];
+var items = ingredientList.map(ingredients => ingredients.toLowerCase());
 //function that gets ingredients from user input
-function getIngredients(item) {
-  $(".addItem").on("click", function() {
-    var ingredient = $("#inputID")
-      .val()
-      .trim();
-  });
-}
+// function getIngredients() {
+//   $(".addItem").on("click", function(event) {
+//     event.preventDefault();
+//     var ingredient = ingredientList.push(ingredient);
+//   });
+//   console.log(ingredientList);
+// }
 //functiont that gets recipe ID's of ingredients users inputed
 
-function getRecipeIDs(ingredients) {
-  ingredientList.push(ingredients);
+$("#addToList").on("click", function(event) {
+  $(".itemBox").empty();
+  event.preventDefault();
+  console.log(items);
+  var addItem = $("#addItem")
+    .val()
+    .trim();
+
+  var item = addItem.toLowerCase();
+
+  // dupItem = false;
+  // check if array is empty
+  // if empty, just push value to array
+
+  // ingredientList.push(addItem);
+
+  if (items.includes(item)) {
+    alert("Button already created!");
+    event.preventDefault();
+
+    // document.getElementById("animal-form").requestFullscreen();
+    // break;
+  } else {
+    ingredientList.push(addItem);
+    console.log(ingredientList);
+
+    for (var i = 0; i < ingredientList.length; i++) {
+      var itemTab = $("<div>");
+
+      var removeButton = $("<button>").addClass("remove");
+      var itemText = $("<p>").text($(item));
+
+      itemTab.append(removeButton, itemText);
+      $(".itemBox").append(itemTab);
+    }
+
+    // document.getElementById("animal-form").reset();
+    // createButtons();
+  }
+});
+// for (var i = 0; i < ingredientList.length; i++) {
+// }
+
+function getRecipeIDs() {
   var queryUrl =
     "https://api.spoonacular.com/recipes/findByIngredients?ingredients=" +
     ingredientList +
@@ -25,11 +68,11 @@ function getRecipeIDs(ingredients) {
   }).then(
     function(result) {
       for (var i = 0; i < result.length; i++) {
-        console.log(`result: ${result[i].id}`);
+        // console.log(`result: ${result[i].id}`);
       }
       // return result
 
-      console.log(`Query URL: ${queryUrl}`);
+      // console.log(`Query URL: ${queryUrl}`);
     },
     function(error) {
       console.log(error);
@@ -37,4 +80,4 @@ function getRecipeIDs(ingredients) {
   );
 }
 
-getRecipeIDs("eggs,bacon,onions");
+// getRecipeIDs("eggs,bacon,onions");
