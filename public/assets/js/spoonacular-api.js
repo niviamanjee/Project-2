@@ -15,7 +15,7 @@ var items = ingredientList.map(ingredients => ingredients.toLowerCase());
 $("#addToList").on("click", function(event) {
   $(".itemBox").empty();
   event.preventDefault();
-  console.log(items);
+  // console.log(items);
   var addItem = $("#addItem")
     .val()
     .trim();
@@ -35,15 +35,19 @@ $("#addToList").on("click", function(event) {
     // document.getElementById("animal-form").requestFullscreen();
     // break;
   } else {
+    // console.log(item);
     ingredientList.push(addItem);
+    items.push(item);
     console.log(`ingredients input: ${ingredientList}`);
     console.log(`To lower Case: ${items}`);
 
-    for (var i = 0; i < ingredientList.length; i++) {
+    for (var i = 0; i < items.length; i++) {
       var itemTab = $("<div>");
 
-      var removeButton = $("<button>").addClass("remove");
-      var itemText = $("<p>").text($(item));
+      var removeButton = $("<button>")
+        .addClass("remove")
+        .text("x");
+      var itemText = $("<p>").text(items[i]);
 
       itemTab.append(removeButton, itemText);
       $(".itemBox").append(itemTab);
