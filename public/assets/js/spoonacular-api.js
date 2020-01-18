@@ -36,7 +36,8 @@ $("#addToList").on("click", function(event) {
     // break;
   } else {
     ingredientList.push(addItem);
-    console.log(ingredientList);
+    console.log(`ingredients input: ${ingredientList}`);
+    console.log(`To lower Case: ${items}`);
 
     for (var i = 0; i < ingredientList.length; i++) {
       var itemTab = $("<div>");
