@@ -1,8 +1,17 @@
 const API_KEY = "f00927d28fd14a4fa274e892d9a2af03";
 
-function getRecipeIDs(ingredients) {
-  var ingredientList = [];
+var ingredientList = [];
+//function that gets ingredients from user input
+function getIngredients(item) {
+  $(".addItem").on("click", function() {
+    var ingredient = $("#inputID")
+      .val()
+      .trim();
+  });
+}
+//functiont that gets recipe ID's of ingredients users inputed
 
+function getRecipeIDs(ingredients) {
   ingredientList.push(ingredients);
   var queryUrl =
     "https://api.spoonacular.com/recipes/findByIngredients?ingredients=" +
