@@ -52,18 +52,23 @@ $("#addToList").on("click", function(event) {
       itemTab.append(removeButton, itemText);
       $(".itemBox").append(itemTab);
     }
-
     // document.getElementById("animal-form").reset();
     // createButtons();
   }
 });
 // for (var i = 0; i < ingredientList.length; i++) {
 // }
+$("#enterList").on("click", function(event) {
+  event.preventDefault();
+  getRecipeIDs(ingredientList);
+});
 
-function getRecipeIDs() {
+function getRecipeIDs(list) {
+  var ingredients = list.toString();
+  console.log(`Ingredients: ${ingredients}`);
   var queryUrl =
     "https://api.spoonacular.com/recipes/findByIngredients?ingredients=" +
-    ingredientList +
+    ingredients +
     "&number=20&instructionsRequired=true&apiKey=" +
     API_KEY;
 
@@ -73,16 +78,14 @@ function getRecipeIDs() {
   }).then(
     function(result) {
       for (var i = 0; i < result.length; i++) {
-        // console.log(`result: ${result[i].id}`);
+        console.log(`result: ${result[i].id}`);
       }
       // return result
 
-      // console.log(`Query URL: ${queryUrl}`);
+      console.log(`Query URL: ${queryUrl}`);
     },
     function(error) {
       console.log(error);
     }
   );
 }
-
-// getRecipeIDs("eggs,bacon,onions");
