@@ -2,7 +2,13 @@ body {
   background-image: url(../styles/images/background.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  padding-top: 5vw;
+  padding-right: 10vw;
+  padding-left: 10vw;
 }
+/* .jumbotron {
+  padding: 70px;
+} */
 .list-group-item {
     line-height: 2.5;
   }
