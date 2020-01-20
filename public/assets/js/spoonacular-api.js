@@ -3,7 +3,7 @@ const API_KEY = "f00927d28fd14a4fa274e892d9a2af03";
 var ingredientList = [];
 var items = ingredientList.map(ingredients => ingredients.toLowerCase());
 
-$("#addToList").on("click", function(event) {
+$("#addToList").on("click", function (event) {
   $(".itemBox").empty();
   event.preventDefault();
   // console.log(items);
@@ -51,12 +51,15 @@ $("#addToList").on("click", function(event) {
 });
 // for (var i = 0; i < ingredientList.length; i++) {
 // }
-$("#enterList").on("click", function(event) {
+$("#enterList").on("click", function (event) {
   event.preventDefault();
   getRecipeIDs(ingredientList);
 });
 
 function getRecipeIDs(list) {
+
+
+
   var ingredients = list.toString();
   console.log(`Ingredients: ${ingredients}`);
   var queryUrl =
@@ -69,20 +72,31 @@ function getRecipeIDs(list) {
     url: queryUrl,
     method: "GET"
   }).then(
-    function(result) {
+    function (result) {
       var recipeIdArray = [];
       for (var i = 0; i < result.length; i++) {
         console.log(`result: ${result[i].id}`);
         recipeIdArray.push(result[i].id);
       }
       // return result
-      getRecipeInfo(recipeIdArray);
+      // getRecipeInfo(recipeIdArray);
+      getRecipeServer(recipeIdArray);
       // console.log(`Query URL: ${queryUrl}`);
     },
-    function(error) {
+    function (error) {
       console.log(error);
     }
   );
+}
+function getRecipeServer(list) {
+  console.log(list);
+  var obj = {
+    "ids": list
+  };
+  console.log("obj", obj);
+  $.post("/api/recipes", obj).then(function () {
+    console.log("back");
+  });
 }
 
 function getRecipeInfo(list) {
@@ -97,7 +111,7 @@ function getRecipeInfo(list) {
       url: queryUrl,
       method: "GET"
     }).then(
-      function(result) {
+      function (result) {
         // var recipeIdArray = [
 
         // for (var i = 0; i < result.length; i++) {
@@ -152,7 +166,7 @@ function getRecipeInfo(list) {
           );
           // console.log(result.analyzedInstructions);
           // console.log(`Query URL: ${queryUrl}`);
-          $(document).on("click", "#viewRecipeBtn", function(event) {
+          $(document).on("click", "#viewRecipeBtn", function (event) {
             event.preventDefault();
             console.log(this);
             $("#recipeModal").modal("show");
@@ -162,7 +176,7 @@ function getRecipeInfo(list) {
           });
         }
       },
-      function(error) {
+      function (error) {
         console.log(error);
       }
     );
