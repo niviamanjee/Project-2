@@ -1,6 +1,6 @@
 var db = require("../models");
 var axios = require("axios");
-var util = require("util")
+
 
 const API_KEY = "f00927d28fd14a4fa274e892d9a2af03";
 
@@ -20,10 +20,12 @@ const queryLoop = async function (list) {
   // }
   const result = await axios.get(queryUrl);
 
-
+  console.log(queryUrl)
   if (result.data.analyzedInstructions.length > 0) {
     for (var i = 0; i < result.data.analyzedInstructions.length; i++) {
+
       var objRecipe = {
+        imageLink: result.data.image,
         recipeName: result.data.title,
         steps: []
 
@@ -86,8 +88,9 @@ module.exports = function (app) {
         }
 
 
-        console.log("hbsobj", hbsobj)
+        // console.log("hbsobj", hbsobj)
         globalArray = hbsobj;
+        console.log(globalArray)
 
         res.redirect("/recipes");
 
