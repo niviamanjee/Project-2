@@ -94,7 +94,9 @@ function getRecipeServer(list) {
     "ids": list
   };
   console.log("obj", obj);
-  $.post("/api/recipes", obj)
+  $.post("/api/recipes", obj).then(function () {
+    location.assign("/recipes")
+  });
   // .then(function () {
   //   console.log("back");
   // });

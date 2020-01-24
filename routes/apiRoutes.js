@@ -5,56 +5,54 @@ var util = require("util")
 const API_KEY = "f00927d28fd14a4fa274e892d9a2af03";
 
 
-const queryLoop = function (list) {
-  console.log("list: ", list)
+const queryLoop = async function (list) {
+  // console.log("list: ", list)
   var queryUrl =
     "https://api.spoonacular.com/recipes/" +
     list.toString() +
     "/information?includeNutrition=false&number=5&instructionsRequired=true&apiKey=" +
     API_KEY;
-  console.log(queryUrl)
-  axios.get(queryUrl).then(function (result) {
-    if (result.data.analyzedInstructions.length > 0) {
+  // console.log(queryUrl)
+
+
+  // axios.get(queryURL).then(function(res)){
+
+  // }
+  const result = await axios.get(queryUrl);
+
+
+  if (result.data.analyzedInstructions.length > 0) {
+    for (var i = 0; i < result.data.analyzedInstructions.length; i++) {
       var objRecipe = {
         recipeName: result.data.title,
         steps: []
 
       }
-      for (var i = 0; i < result.data.analyzedInstructions.length; i++) {
-        // console.log(result.data.analyzedInstructions[i].steps);
+      // console.log(result.data.analyzedInstructions[i].steps);
 
-        for (j = 0; j < result.data.analyzedInstructions[i].steps.length; j++) {
-          var objStep = {
-            stepNumber: 0,
-            stepText: ""
-          }
-          objStep.stepNumber = result.data.analyzedInstructions[i].steps[j].number;
-          objStep.stepText = result.data.analyzedInstructions[i].steps[j].step;
-          console.log(objStep)
-          objRecipe.steps.push(objStep)
-          console.log(objRecipe)
-
+      for (j = 0; j < result.data.analyzedInstructions[i].steps.length; j++) {
+        var objStep = {
+          stepNumber: 0,
+          stepText: ""
         }
+        objStep.stepNumber = result.data.analyzedInstructions[i].steps[j].number;
+        objStep.stepText = result.data.analyzedInstructions[i].steps[j].step;
+        objRecipe.steps.push(objStep)
 
       }
 
-
-      console.log("inside the loop", objRecipe)
-      return objRecipe
     }
 
-    // var recipeIdArray = [
-
-    // for (var i = 0; i < result.length; i++) {
-    //console.log(`Recipe name: ${result.data.title}`);
-    //console.log(result.data);
-    // console.log(result.data.analyzedInstructions)
-  });
+    // console.log("inside the loop", objRecipe)
+    return objRecipe
+  }
 }
 
 
 
-const getObj = util.promisify(queryLoop)
+// const getObj = util.promisify(queryLoop)
+
+var globalArray = [];
 
 module.exports = function (app) {
   // Get all examples
@@ -62,13 +60,17 @@ module.exports = function (app) {
     res.render("index")
 
   });
+  app.get("/recipes", function (req, res) {
+    res.render("recipes", globalArray);
+
+  });
 
   app.post("/api/recipes", function (req, res) {
     var list = req.body;
-    console.log(list);
     for (key in list) {
       list = list[key]
     }
+    // console.log(`list array: ${list.length}`);
     async function prepareObj(list) {
       try {
         var hbsobj = {
@@ -76,15 +78,20 @@ module.exports = function (app) {
         }
 
         for (var i = 0; i < list.length; i++) {
-          const objRecipe = await getObj(list[i])
-          console.log(objRecipe)
+          // console.log('inside of loop');
+          const objRecipe = await queryLoop(list[i]);
+          // console.log("moter fucking test: ", objRecipe)
           hbsobj.recipes.push(objRecipe)
 
         }
 
 
         console.log("hbsobj", hbsobj)
-        res.render("recipes", hbsobj)
+        globalArray = hbsobj;
+
+        res.redirect("/recipes");
+
+
       } catch (err) {
         console.log(err)
       }

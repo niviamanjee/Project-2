@@ -2,11 +2,11 @@
 
     <p>testtttttttt</p>
 
-    {{#each recipes}}
+    {{#each hbsobj.recipes}}
 
     <div class="card" style="width: 18rem;">
 
-        {{#each objRecipe}}
+        {{#each recipes.objRecipe}}
         <div class="card-body">
             <h5 class="card-title">{{this.recipeName}}</h5>
 
