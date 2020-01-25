@@ -21,10 +21,13 @@
     "util": "^0.12.1",
     "xml-js": "^1.6.11"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "node-sass": "^4.13.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "compile:sass": "node-sass sass/main.scss styles/style.css -w"
   },
   "repository": {
     "type": "git",

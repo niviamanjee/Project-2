@@ -22,14 +22,20 @@ const queryLoop = async function (list) {
 
   console.log(queryUrl)
   if (result.data.analyzedInstructions.length > 0) {
-    for (var i = 0; i < result.data.analyzedInstructions.length; i++) {
+    var ingredientsArray = []
+    for (var k = 0; k < result.data.extendedIngredients.length; k++) {
+      ingredientsArray.push(result.data.extendedIngredients[k].original)
+    }
 
+    for (var i = 0; i < result.data.analyzedInstructions.length; i++) {
       var objRecipe = {
         imageLink: result.data.image,
         recipeName: result.data.title,
+        ingredients: [],
         steps: []
 
       }
+
       // console.log(result.data.analyzedInstructions[i].steps);
 
       for (j = 0; j < result.data.analyzedInstructions[i].steps.length; j++) {
@@ -40,11 +46,12 @@ const queryLoop = async function (list) {
         objStep.stepNumber = result.data.analyzedInstructions[i].steps[j].number;
         objStep.stepText = result.data.analyzedInstructions[i].steps[j].step;
         objRecipe.steps.push(objStep)
+        objRecipe.ingredients.push(ingredientsArray)
 
       }
 
     }
-
+    console.log(`Ingredients: ${objRecipe.ingredients}`)
     // console.log("inside the loop", objRecipe)
     return objRecipe
   }

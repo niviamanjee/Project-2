@@ -44,7 +44,9 @@
 
                     <div class="modal-body">
                         <h5 class="modal-title">{{this.recipeName}}</h5>
-
+                        {{#each this.ingredients}}
+                        <p class="modal-text">{{this.stepNumber}}. {{this.stepText}}</p>
+                        {{/each}}
                         {{#each this.steps}}
                         <p class="modal-text">{{this.stepNumber}}. {{this.stepText}}</p>
                         {{/each}}
@@ -60,7 +62,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+
             </div>
         </div>
     </div>
