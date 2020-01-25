@@ -1,4 +1,11 @@
+<<<<<<< HEAD
+.DS_Store
+node_modules
+npm-debug.log
+.env
+=======
 node_modules
 npm-debug.log
 .env
 .DS_Store
+>>>>>>> 6009912d73d00a57c89326671efa55ae0d2c0865

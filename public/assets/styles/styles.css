@@ -1,5 +1,5 @@
 body {
-  background-image: url(../styles/images/background.jpg);
+  background-image: url("../styles/images/background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   padding-top: 5vw;

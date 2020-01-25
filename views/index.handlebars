@@ -1,21 +1,27 @@
-<form>
-    <div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Fluid jumbotron</h1>
-    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-  </div>
+<div class="jumbotron jumbotron-fluid">
 
-     <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Ingredients" aria-label="Search">
-                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Ingredients</button>
-                </form>
-</form>
-<div class="itemBox">
-    <div id="itemNumber">
-        <button id="removeFromList">close</button>
+    <form>
+        <div class="form-group">
+            <label>Enter Ingredient</label>
+            <input class="form-control" id="addItem">
+            <button id="addToList"> Add</button>
+
+        </div>
+
+    </form>
+
+    <div class="itemBox">
+        <div id="itemNumber">
+            <button id="removeFromList">close</button>
+        </div>
     </div>
-</div>
-<button type="submit" class="btn btn-primary" id="enterList">Submit</button>
-<div class="card-box">
-</div>
+
+
+
+
+
+    <button type="submit" class="btn btn-primary" id="enterList">Submit</button>
+
+
+
 </div>
